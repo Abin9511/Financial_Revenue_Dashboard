@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styling.css') }}">
+        <title>Financial Revenue</title>
+    </head>
+    <body>
+        <h1 class="a">Financial Revenue Dashboard </h1>
+        <br><br>
+        <h4 class="b">Add Revenue Entry</h4>
+        <form action="/add" method="post">
+
+        <label class="c">Enter the Date : <input type="date"  name="date" class="d"></label> 
+    
+        <label class="c">Enter the Amount : <input type="number" name="amt" class="d" placeholder="eg:-12345"></label>
+
+        <label class="c">Enter the Source : <input type="text" name="src" class="d" placeholder="eg:- subsription"></label>
+        <input type="submit" value="Add Revenue" class="add-revenue_button">
+
+         </form>
+            <!-- DATABASE -->
+
+
+         {% if null_factor %}
+         <br>
+         <strong style="color: red;">Field Is Empty!!!</strong>
+
+         {% endif %} <!-- Field is Empty -->
+
+        {% if x %}
+         <br>
+        <strong>Data Added To Database</strong>
+        
+         {% endif %}
+         <br>
+
+         <h4 class="b">Revenue Analytics</h4>
+    
+         <form action="/choose" method="post">
+
+            <select name="opt" id="selects" class="select">
+                <option value=""  disabled selected hidden>Select Analysis Type</option>
+                <option value="Total_revenue" {% if selected == "Total_revenue" %} selected {% endif %}>Total Revenue</option>
+                <option value="Daily" {% if selected == "Daily" %}selected{% endif %}> Daily</option>
+                <option value="Monthly" {% if selected == "Monthly" %}selected{% endif %}>Monthly</option>
+                <option value="Yearly" {% if selected == "Yearly" %}selected{% endif %}>Yearly</option>
+                <option value="Revenue_btw" {% if selected == "Revenue_btw" %}selected{% endif %}>Revenue Between Dates</option>
+
+            </select>
+            <div id="dateFields" style="display:none">
+
+                <br>
+                <label class="c">Enter The Start Date : <input type="date" name="start" class="d"></label>
+
+                
+                <label class="c">Enter The End Date : <input type="date" name="end" class="d"></label>
+
+                <br>
+
+            </div>
+                <br><br>
+            <input type="submit" value="Generate Report" class="generate-report_button">
+
+    
+    <div id="result">
+        <!-- Revenue Between Dates -->
+        <!-- Daily 5th -->
+         <br>
+        {% if value5 %}
+
+        <strong style="color: red;">No Records Present!</strong>
+        
+        {% endif %} <!-- No Value In the Database-->
+
+        
+
+        {% if total %}
+
+        Total Amount Between <strong>{{start}}</strong> And <strong>{{end}}</strong> is : <strong>{{total}}</strong>
+        <br>
+        Average Amount Between <strong>{{start}}</strong> And <strong>{{end}}</strong> is : <strong>{{average}}</strong>
+
+        {% endif %} <!-- Normal Checking -->
+
+        {% if total is none %}
+
+        No Records To Display
+
+        {% endif %}
+          <!-- if database is empty  -->
+        
+        {% if e_date %}
+
+        <br><br> Inavalid Date Format Please Check Again : <br><br>
+        Start Date : <strong style="color: red;">{{s_date}}</strong> <br>
+        End Date : <strong style="color: red;">{{e_date}}</strong>
+
+        {% endif %} <!-- invalid Date format-->
+
+        {% if null_date %}
+
+        <br><br> <strong style="color: red;">Please Enter Valid Date!!!</strong>
+
+        {% endif %} <!-- Date Inputs are Empty-->
+    </div>
+        
+
+        <!-- Daily 1st-->
+         <br>
+        {% if value1 %}
+
+        <strong style="color: red;">No Records Present!</strong>
+        
+        {% endif %} <!-- No Value In the Database-->
+
+
+         </form>
+         {% if sum %}
+         <table border="1">
+            <tr>
+            <th>Date</th>
+            <th>Revenue</th>
+            </tr>
+
+            {% for x,y in sum %}
+            <tr>
+            <td>{{x}}</td>
+            <td>{{y}}</td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+            </table> <br>  
+
+        <!--Monthly 2nd-->
+
+        {% if value2 %}
+
+        <strong style="color: red;">No Records Present!</strong>
+        
+        {% endif %} <!-- No Value In the Database-->
+
+
+         {% for x, y, z in month  %}
+
+         {{x}} : {{y}} = {{z}} <br>
+         
+         {% endfor %} 
+
+        <!-- Yearly 3rd-->
+
+        {% if value3 %}
+
+        <strong style="color: red;">No Records Present!</strong>
+        
+        {% endif %} <!-- No Value In the Database-->
+
+         {% for x , y in year %}
+
+         {{x}} : {{y}} <br>
+
+         {% endfor %}  
+
+        <!-- Total Revenue 4th-->
+
+        {% if value4 %}
+
+        <strong style="color: red;">No Records Present!</strong>
+        
+        {% endif %} <!-- No Value In the Database-->
+
+         {% if total2 %}
+
+         Total revenue : {{total2}}
+
+         {% endif %} <!-- total Revenue Displaying -->
+
+         
+
+        <!--Revenue By Source -->
+
+    <h4 class="b">Revenue by Source</h4>
+    <br>
+    <form action="/source" method="post">
+     <input type="submit" value="View Revenue Sources" class="source_button">
+
+    </form>
+        <br>
+        {% if value6 %}
+
+        <strong style="color: red;">No Records Present!</strong>
+        
+        {% endif %}
+
+        {% for x , y in source %}
+         
+        {{x}} : {{y}} <br>
+
+        {% endfor %}
+<script>
+        document.getElementById("selects").addEventListener("change", function() {
+
+             selectedvalue = this.value;
+             dateFields = document.getElementById("dateFields");
+             result = document.getElementById("result")
+
+            if(selectedvalue === "Revenue_btw"){
+                dateFields.style.display = "block";
+            } else {
+                dateFields.style.display = "none";
+                result.innerHTML = ""
+            }
+
+            });
+</script>
+
+    </body>
+</html>

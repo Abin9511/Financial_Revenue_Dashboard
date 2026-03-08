@@ -1,0 +1,86 @@
+.a{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.b{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.c{
+    margin-right: 20px;
+
+}
+
+.d{
+    cursor: pointer;
+    width: 150px;
+    height: 20px;
+    border-radius: 10px;
+    transition:  background-color 0.15s,
+    color 0.15s;   
+}
+
+.d:hover{
+    background-color: rgb(225, 223, 223);
+}
+.d:focus{
+    outline: none;
+}
+
+.add-revenue_button{
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: none;
+    height: 30px;
+    width: 90px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.select{
+    cursor: pointer;
+    width: 150px;
+    height: 30px;
+    border-radius: 10px;
+    transition:  background-color 0.15s,
+    color 0.15s;
+    margin-right: 20px;
+    transition: all 0.3s ease;
+    border-style: solid;
+}
+
+.select:hover{
+    background-color: rgb(225, 223, 223);
+}
+
+   
+.select:focus{
+    border-color: rgb(0, 0, 0);
+    outline:none;
+}
+
+.generate-report_button{
+
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: none;
+    height: 30px;
+    width: 110px;
+    cursor: pointer;
+    border-radius: 3px;
+
+}
+
+.source_button{
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: none;
+    height: 30px;
+    width: 170px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-left: 30px;
+    /* margin-top: 20px; */
+}
