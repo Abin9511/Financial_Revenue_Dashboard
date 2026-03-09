@@ -1,4 +1,4 @@
-Financial Revenue Dashboard – Backend Documentation
+Financial Revenue Dashboard – Python Backend Documentation
 
 1. Project Overview
 
